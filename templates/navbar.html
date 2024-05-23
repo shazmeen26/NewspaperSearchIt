@@ -1,0 +1,30 @@
+{% load static %}
+<nav class="navbar navbar-expand-custom navbar-mainbg">
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav ml-auto">
+            <div class="hori-selector">
+                <div class="left"></div>
+                <div class="right"></div>
+            </div>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'upload' %}"><i class="far fa-address-book"></i>Upload</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'search' %}"><i class="far fa-clone"></i>Search</a>
+            </li>
+
+            {% if user.is_staff %}
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'unapprovedPost' %}"><i class="far fa-clone"></i>Approve</a>
+            </li>
+            {% endif %}
+
+            <li class="nav-item">
+                <a class="nav-link" href="{% url 'logout' %}"><i class="far fa-address-book"></i>Logout</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>

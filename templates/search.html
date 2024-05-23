@@ -1,0 +1,55 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search</title>
+    <link rel="stylesheet" href="{% static 'css/search.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+    <br>
+
+    <div class="search-wrapper">
+        <div class="input-holder">
+            <input type="text" class="search-input" id="search" placeholder="Type to search" />
+            <button class="search-icon" id="search-button" onclick="searchToggle(this, event);"><span></span></button>
+        </div>
+        <span class="close" onclick="searchToggle(this, event);"></span>
+    </div>
+
+    <div class="loader">
+        <div class="inner one"></div>
+        <div class="inner two"></div>
+        <div class="inner three"></div>
+    </div>
+
+    <div class="result-container">
+    </div>
+
+    <div class="load-more">
+        <a href="#" class="button js-load-more">Load more</a>
+    </div>
+    <br>
+
+    <div class="no-results-found">
+        <h2>Uh Oh! No results found.</h2>
+        <p>Try with some different keyword!</p>
+    </div>
+
+    <script>
+        window.csrf_token = "{{ csrf_token }}";
+    </script>
+
+    <script src="{% static 'js/search.js' %}"></script>
+</body>
+
+</html>

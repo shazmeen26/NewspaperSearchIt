@@ -1,0 +1,63 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="shortcut icon" href="{% static 'favicon.ico' %}" type="image/x-icon" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Approve</title>
+    <link rel="stylesheet" href="{% static 'css/approvePost.css' %}">
+    <link rel="stylesheet" href="{% static 'css/navbar.css' %}">
+</head>
+
+<body>
+    {% include 'navbar.html' %}
+
+    <div class="loader">
+        <div class="inner one"></div>
+        <div class="inner two"></div>
+        <div class="inner three"></div>
+    </div>
+
+    <div id="cover-spin"></div>
+
+    <div class="result-container">
+        {% for post in posts %}
+
+        <div id="{{post.id}}">
+            <img src="http://localhost:8000/media/{{ post.file }}" alt="">
+
+            <div class="row">
+                <div class="column" style="width:100%">
+                    <img id="approve - {{post.id}}" onclick="acceptPost({{post.id}})" class="approve-reject"
+                        src="{% static 'images/approve.png' %}" alt="">
+                </div>
+
+                <div class="column" style="width:100%">
+                    <img id="reject - {{post.id}}" onclick="rejectPost({{post.id}})" class="approve-reject"
+                        src="{% static 'images/reject.png' %}" alt="">
+                </div>
+            </div>
+        </div>
+
+        {% endfor %}
+    </div>
+
+    {% if not posts %}
+    <div class="no-results-found">
+        <h2>Uh Oh! No results found.</h2>
+    </div>
+    {% endif %}
+
+    <script>
+        window.csrf_token = "{{ csrf_token }}";
+    </script>
+
+    <script src="{% static 'js/approvePost.js' %}"></script>
+</body>
+
+</html>
